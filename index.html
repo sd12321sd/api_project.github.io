@@ -6,19 +6,167 @@
     <title>Audio and Image Page</title>
 </head>
 <body>
-    <h1>Audio and Image Page</h1>
-    <h2>Audio </h2>
-    <p>This is an audio: </p>
-    <!-- 音频部分 -->
-    <audio controls>
-        <source src="track01_ErosRamazotti.mp3" type="audio/mp3">
+    <h1>Customizable Text-to-speech Personal Assistant </h1>
+    <p>2023 fall API final project, finished by </p>
+    <p><strong>Students:</strong> Shupei Li, Chenyu Shi, Siwen Tu, Shuang Fan</p>
+    <h2>Introduction</h2>
+    <p>With the development of deep learning, text-to-speech models have achieved great progress in many applications, such as audiobook reading or audio assistant. 
+    In this project, we built a customizable text-to-speech personal assistant based on VITS (original repo: <a href="https://github.com/jaywalnut310/vits">link</a>). 
+    We trained and fine-tuned the model on different languages of different speakers, which allows us to build a text-to-speech personal assistant of different options.
+    </p>
+    <h2>Training of the model</h2>
+    <p>We trained the model for 96000 epochs in total. And we record the performance during the training. Here you can choose the number of epoch to hear a clip of the audio of the sentence "我爱计算机科学" ("I love computer science", the original speaking language is Mandarin). We can hear that at the beginning, the audio clip is just some noise, but after training , this audio clip gradually becomes more realistic. </p>
+    
+    <label>
+        <input type="radio" name="audioOption" value="EP0">
+        0/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP5000">
+        5000/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP10000">
+        10000/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP30000">
+        30000/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP50000">
+        50000/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP70000">
+        70000/96000 epoch
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption" value="EP96000">
+        96000/96000 epoch
+    </label>
+    <br>
+
+    <audio controls id="audioPlayer">
+        <!-- 默认音频，可以是一个空的音频文件 -->
+        <source src="" type="audio/wav">
         Your browser does not support the audio element.
     </audio>
-    <h2>Picture </h2>
-    <p>This is a picture: </p>
-    <!-- 图片部分 -->
-    <img src="1.png" alt="Description of your image">
 
-    <p>This is a simple webpage with an embedded audio file and an image.</p>
+    <script>
+        // JavaScript 代码用于更改音频源
+        document.querySelectorAll('input[name="audioOption"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('audioPlayer').src = this.value + '.wav';
+            });
+        });
+    </script>
+
+    <h2>Multi-Language</h2>
+    <p>A customizable text-to-speech assistant should not be limited on one Language. So we fine-tune our model using the pre-trained weights on different Languages' audio datasets. The fine-tuning process uses VITS fast fine-tuning repository (original repo: <a href="https://github.com/Plachtaa/VITS-fast-fine-tuning">link</a>). Here you can play the example audio clips for the same sentence in the different language. The example sentence are "早上好" and "谢谢你的帮助" in Mandarin, with corresponding sentences in Japanese "おはようございます" and "お手伝いありがとうございます" (the meanings are "Good morning" and "Thank you for your help")</p>
+
+    <label>
+        <input type="radio" name="audioOption1" value="C1">
+        Mandarian sentence 1
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption1" value="C2">
+        Mandarian sentence 2
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption1" value="J1">
+        Japanese sentence 1
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption1" value="J2">
+        Japanese sentence 2
+    </label>
+    <br>
+
+    <audio controls id="audioPlayer1">
+        <!-- 默认音频，可以是一个空的音频文件 -->
+        <source src="" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // JavaScript 代码用于更改音频源
+        document.querySelectorAll('input[name="audioOption1"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('audioPlayer1').src = this.value + '.wav';
+            });
+        });
+    </script>
+
+    <h2>Multi-Speaker </h2>
+
+    <p>A customizable text-to-speech assistant is also supposed to allow several kinds of voices. So we fine-tune our model using the pre-trained weights on different speakers' audio datasets. The fine-tuning also takes advantage of the VITS fast fine-tuning. Here you can play the example audio clips for the same sentence spoken by different voices. The example audio clip is "我很期待这次机会" in Mandarin (the meaning is "I'm looking forward to this opportunity").</p>
+
+    <label>
+        <input type="radio" name="audioOption2" value="P1">
+        child
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption2" value="P2">
+        middle-aged-female
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption2" value="P3">
+        middle-aged-male
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption2" value="P4">
+        young-female
+    </label>
+    <br>
+
+    <label>
+        <input type="radio" name="audioOption2" value="P5">
+        young-male
+    </label>
+    <br>
+
+    <audio controls id="audioPlayer2">
+        <!-- 默认音频，可以是一个空的音频文件 -->
+        <source src="" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // JavaScript 代码用于更改音频源
+        document.querySelectorAll('input[name="audioOption2"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                document.getElementById('audioPlayer2').src = this.value + '.wav';
+            });
+        });
+    </script>
+
+    <h2>Conclusion </h2>
+    <p>To conclude, we train and fine-tune a text-to-speech model in different languages of multiple speakers. The final well-trained model can produce realistic voice to accomplish this task as an audio assistant.</p>
+
 </body>
 </html>
